@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int startingHealth = 100;
+    [SerializeField] int startingHealth = 100;
     public int currentHealth;
     public Slider healthSlider;
     public Image damageImage;
@@ -32,6 +32,7 @@ public class PlayerHealth : MonoBehaviour
 
         playerShooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
+        Debug.Log(playerShooting);
     }
 
 

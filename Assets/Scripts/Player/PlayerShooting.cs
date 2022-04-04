@@ -1,26 +1,37 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public int damagePerShot = 20;                  
-    public float timeBetweenBullets = 0.15f;        
-    public float range = 100f;                      
+    public int damagePerShot = 20;
+    public float timeBetweenBullets = 0.15f;
+    public float range = 100f;
 
-    float timer;                                    
-    Ray shootRay = new Ray();                                   
-    RaycastHit shootHit;                            
-    int shootableMask;                             
-    ParticleSystem gunParticles;                    
-    LineRenderer gunLine;                           
-    AudioSource gunAudio;                           
-    Light gunLight;                                 
-    float effectsDisplayTime = 0.2f;                
+    public int shootingRays = 3;
+
+    private float shootingAngleDif = 20;
+
+    private float timer;
+    private Ray shootRay = new Ray();
+    private RaycastHit shootHit;
+    private int shootableMask;
+    private ParticleSystem gunParticles;
+    private List<LaserController> gunLines;
+    private AudioSource gunAudio;
+    private Light gunLight;
+    private float effectsDisplayTime = 0.2f;
+    [SerializeField] private LaserController laserPrefab;
 
     void Awake()
     {
         shootableMask = LayerMask.GetMask("Shootable");
         gunParticles = GetComponent<ParticleSystem>();
-        gunLine = GetComponent<LineRenderer>();
+        gunLines = new List<LaserController>();
+        for (int i = 0; i < shootingRays; i++)
+        {
+            var newLine = Instantiate(laserPrefab);
+            gunLines.Add(newLine);
+        }
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
     }
@@ -42,41 +53,48 @@ public class PlayerShooting : MonoBehaviour
 
     public void DisableEffects()
     {
-        gunLine.enabled = false;
+        for (int i = 0; i < shootingRays; i++)
+        {
+            gunLines[i].setEnable(false);
+        }
         gunLight.enabled = false;
     }
 
     public void Shoot()
     {
         timer = 0f;
-
         gunAudio.Play();
-
         gunLight.enabled = true;
-
         gunParticles.Stop();
         gunParticles.Play();
-
-        gunLine.enabled = true;
-        gunLine.SetPosition(0, transform.position);
-
         shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
-
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+        bool isEven = (shootingRays % 2 == 0);
+        var temp = shootingRays / 2 + (isEven ? 1 : 0);
+        var initialDirection = transform.forward;
+        if (isEven)
         {
-            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-
-            if (enemyHealth != null)
+            initialDirection = Quaternion
+            .AngleAxis((float)(shootingAngleDif * 1.5), Vector3.up) * initialDirection;
+        }
+        var dests = new List<Vector3>();
+        for (int i = 0 - temp; i <= (shootingRays / 2); i++)
+        {
+            var direction = Quaternion.AngleAxis(shootingAngleDif * i, Vector3.up) * initialDirection;
+            var dest = transform.position + direction * range;
+            shootRay.direction = direction;
+            if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
             {
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+                enemyHealth?.TakeDamage(damagePerShot, shootHit.point);
+                dest = shootHit.point;
             }
-
-            gunLine.SetPosition(1, shootHit.point);
+            dests.Add(dest);
         }
-        else
+        for (int i = 0; i < shootingRays; i++)
         {
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+            gunLines[i].setEnable(true);
+            gunLines[i].AssignTarget(transform.position, dests[i]);
         }
+
     }
 }
