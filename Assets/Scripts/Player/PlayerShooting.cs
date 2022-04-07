@@ -8,7 +8,6 @@ public class PlayerShooting : MonoBehaviour
     private float shootingAngleDif = 20;
     private float timer;
     private Ray shootRay = new Ray();
-    private RaycastHit shootHit;
     private int shootableMask;
     private ParticleSystem gunParticles;
     private List<LaserController> gunLines;
@@ -82,7 +81,7 @@ public class PlayerShooting : MonoBehaviour
             var direction = Quaternion.AngleAxis(shootingAngleDif * i, Vector3.up) * initialDirection;
             var dest = transform.position + direction * playerConfig.shootingRange;
             shootRay.direction = direction;
-            if (Physics.Raycast(shootRay, out shootHit, playerConfig.shootingRange, shootableMask))
+            if (Physics.Raycast(shootRay, out var shootHit, playerConfig.shootingRange, shootableMask))
             {
                 EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
                 enemyHealth?.TakeDamage(playerConfig.attackPower, shootHit.point);
