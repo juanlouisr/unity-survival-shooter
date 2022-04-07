@@ -44,4 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d812d5b5c82e2d84c8f708f5d06086da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 3682495784914118860, guid: d188857b5bc668542be6337a64d394f2,
+    type: 3}
+  orbPrefab: {fileID: 5294971962044909129, guid: 3775fa2e704aa11418e1d36db8819cfc,
+    type: 3}
+  spawnDelayTime: 2
+  isLooping: 1
