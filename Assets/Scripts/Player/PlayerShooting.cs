@@ -15,7 +15,7 @@ public class PlayerShooting : MonoBehaviour
     private AudioSource gunAudio;
     private Light gunLight;
     private float effectsDisplayTime = 0.2f;
-    [SerializeField] private LaserController laserPrefab;
+    [SerializeField] private GameObject laserPrefab;
 
     void Awake()
     {
@@ -47,7 +47,7 @@ public class PlayerShooting : MonoBehaviour
         for (int i = 0; i < gunLines.Count; i++)
         {
             gunLines[i].setEnable(false);
-            Destroy(gunLines[i]);
+            Destroy(gunLines[i].gameObject);
         }
         gunLines.Clear();
         gunLight.enabled = false;
@@ -59,7 +59,7 @@ public class PlayerShooting : MonoBehaviour
         for (int i = 0; i < playerConfig.raysCount; i++)
         {
             var newLine = Instantiate(laserPrefab);
-            gunLines.Add(newLine);
+            gunLines.Add(newLine.GetComponent<LaserController>());
         }
         timer = 0f;
         gunAudio.Play();
