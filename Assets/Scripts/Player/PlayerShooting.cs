@@ -3,14 +3,9 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public int damagePerShot = 20;
-    public float timeBetweenBullets = 0.15f;
-    public float range = 100f;
 
-    public int shootingRays = 3;
-
+    private PlayerConfig playerConfig;
     private float shootingAngleDif = 20;
-
     private float timer;
     private Ray shootRay = new Ray();
     private RaycastHit shootHit;
@@ -24,28 +19,24 @@ public class PlayerShooting : MonoBehaviour
 
     void Awake()
     {
+        playerConfig = GetComponentInParent<PlayerConfig>();
         shootableMask = LayerMask.GetMask("Shootable");
         gunParticles = GetComponent<ParticleSystem>();
         gunLines = new List<LaserController>();
-        for (int i = 0; i < shootingRays; i++)
-        {
-            var newLine = Instantiate(laserPrefab);
-            gunLines.Add(newLine);
-        }
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         timer += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+        if (Input.GetButton("Fire1") && timer >= playerConfig.timeBetweenBullets && Time.timeScale != 0)
         {
             Shoot();
         }
 
-        if (timer >= timeBetweenBullets * effectsDisplayTime)
+        if (timer >= playerConfig.timeBetweenBullets * effectsDisplayTime)
         {
             DisableEffects();
         }
@@ -53,23 +44,32 @@ public class PlayerShooting : MonoBehaviour
 
     public void DisableEffects()
     {
-        for (int i = 0; i < shootingRays; i++)
+        for (int i = 0; i < gunLines.Count; i++)
         {
             gunLines[i].setEnable(false);
+            Destroy(gunLines[i]);
         }
+        gunLines.Clear();
         gunLight.enabled = false;
     }
 
     public void Shoot()
     {
+        gunLines.Clear();
+        for (int i = 0; i < playerConfig.raysCount; i++)
+        {
+            var newLine = Instantiate(laserPrefab);
+            gunLines.Add(newLine);
+        }
         timer = 0f;
         gunAudio.Play();
         gunLight.enabled = true;
         gunParticles.Stop();
         gunParticles.Play();
         shootRay.origin = transform.position;
-        bool isEven = (shootingRays % 2 == 0);
-        var temp = shootingRays / 2 + (isEven ? 1 : 0);
+
+        bool isEven = (playerConfig.raysCount % 2 == 0);
+        var temp = playerConfig.raysCount / 2 + (isEven ? 1 : 0);
         var initialDirection = transform.forward;
         if (isEven)
         {
@@ -77,20 +77,20 @@ public class PlayerShooting : MonoBehaviour
             .AngleAxis((float)(shootingAngleDif * 1.5), Vector3.up) * initialDirection;
         }
         var dests = new List<Vector3>();
-        for (int i = 0 - temp; i <= (shootingRays / 2); i++)
+        for (int i = 0 - temp; i <= (playerConfig.raysCount / 2); i++)
         {
             var direction = Quaternion.AngleAxis(shootingAngleDif * i, Vector3.up) * initialDirection;
-            var dest = transform.position + direction * range;
+            var dest = transform.position + direction * playerConfig.shootingRange;
             shootRay.direction = direction;
-            if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+            if (Physics.Raycast(shootRay, out shootHit, playerConfig.shootingRange, shootableMask))
             {
                 EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-                enemyHealth?.TakeDamage(damagePerShot, shootHit.point);
+                enemyHealth?.TakeDamage(playerConfig.attackPower, shootHit.point);
                 dest = shootHit.point;
             }
             dests.Add(dest);
         }
-        for (int i = 0; i < shootingRays; i++)
+        for (int i = 0; i < playerConfig.raysCount; i++)
         {
             gunLines[i].setEnable(true);
             gunLines[i].AssignTarget(transform.position, dests[i]);

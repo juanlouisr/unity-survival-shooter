@@ -2,17 +2,19 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 6f;
-    Vector3 movement;
-    Animator anim;
-    Rigidbody playerRigidbody;
-    int floorMask;
-    float camRayLength = 100f;
+    private Vector3 movement;
+    private Animator anim;
+    private Rigidbody playerRigidbody;
+    private int floorMask;
+    private float camRayLength = 100f;
+    private PlayerConfig playerConfig;
 
     private void Awake()
     {
         //mendapatkan nilai mask dari layer yang bernama Floor
         floorMask = LayerMask.GetMask("Floor");
+
+        playerConfig = GetComponent<PlayerConfig>();
 
         //Mendapatkan komponen Animator
         anim = GetComponent<Animator>();
@@ -41,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         movement.Set(h, 0f, v);
 
         //Menormalisasi nilai vector agar total panjang dari vector adalah 1
-        movement = movement.normalized * speed * Time.deltaTime;
+        movement = movement.normalized * playerConfig.moveSpeed * Time.deltaTime;
 
         //Move to position
         playerRigidbody.MovePosition(transform.position + movement);

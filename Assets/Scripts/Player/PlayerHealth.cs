@@ -6,21 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int startingHealth = 100;
-    public int currentHealth;
-    public Slider healthSlider;
-    public Image damageImage;
-    public AudioClip deathClip;
-    public float flashSpeed = 5f;
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    public float currentHealth;
+    [SerializeField] Slider healthSlider;
+    [SerializeField] Image damageImage;
+    [SerializeField] AudioClip deathClip;
+    [SerializeField] float flashSpeed = 5f;
+    [SerializeField] Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
 
-    Animator anim;
-    AudioSource playerAudio;
-    PlayerMovement playerMovement;
-    PlayerShooting playerShooting;
-    bool isDead;
-    bool damaged;
+    private Animator anim;
+    private AudioSource playerAudio;
+    private PlayerMovement playerMovement;
+    private PlayerShooting playerShooting;
+    private PlayerConfig playerConfig;
+    private bool isDead;
+    private bool damaged;
 
 
     void Awake()
@@ -29,10 +29,8 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
-
         playerShooting = GetComponentInChildren<PlayerShooting>();
-        currentHealth = startingHealth;
-        Debug.Log(playerShooting);
+        currentHealth = GetComponentInChildren<PlayerConfig>().maxHealth;
     }
 
 
