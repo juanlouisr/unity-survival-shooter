@@ -11,7 +11,7 @@ public class Orb : MonoBehaviour
     Material[] materials = new Material[System.Enum.GetValues(typeof(OrbType)).Length];
     // Start is called before the first frame update
     public OrbType orbType = OrbType.Health;
-    public float multiplier = 1.2f;
+    public float multiplier = 0.1f;
 
     [SerializeField] float orbUpTime = 10f;
 
@@ -24,7 +24,7 @@ public class Orb : MonoBehaviour
         rend = gameObject.GetComponent<Renderer>();
         rend.material = materials[(int)orbType];
     }
-    
+
     void Start()
     {
         Destroy(gameObject, orbUpTime);
@@ -38,6 +38,29 @@ public class Orb : MonoBehaviour
             audio.Play();
             rend.enabled = false;
             Destroy(gameObject, audio.clip.length);
+
+            var playerData = other.GetComponent<PlayerConfig>();
+
+            switch (orbType)
+            {
+                case OrbType.Health:
+                    var playerHealth = other.GetComponent<PlayerHealth>();
+                    playerHealth.currentHealth += multiplier * playerData.maxHealth;
+                    playerHealth.currentHealth = Mathf.Clamp(playerHealth.currentHealth, 0, playerData.maxHealth);
+                    break;
+
+                case OrbType.Power:
+                    playerData.attackPower += multiplier * playerData.MaxAttackPower;
+                    playerData.attackPower = Mathf.Clamp(playerData.attackPower, 0, playerData.MaxAttackPower);
+                    break;
+
+                case OrbType.Speed:
+                    playerData.moveSpeed += multiplier * playerData.MaxSpeed;
+                    playerData.moveSpeed = Mathf.Clamp(playerData.moveSpeed, 0, playerData.MaxSpeed);
+                    break;
+
+
+            }
         }
     }
 
