@@ -13,24 +13,31 @@ public class Orb : MonoBehaviour
     public OrbType orbType = OrbType.Health;
     public float multiplier = 1.2f;
 
+    [SerializeField] float orbUpTime = 10f;
+
+    private Renderer rend;
+
     void Awake()
     {
         var orbTypes = System.Enum.GetValues(typeof(OrbType));
         orbType = (OrbType)Random.Range(0, orbTypes.Length);
-        gameObject.GetComponent<Renderer>().material = materials[(int)orbType];
+        rend = gameObject.GetComponent<Renderer>();
+        rend.material = materials[(int)orbType];
     }
-
-    void Take()
+    
+    void Start()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, orbUpTime);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Player detected");
-            Destroy(gameObject);
+            var audio = GetComponent<AudioSource>();
+            audio.Play();
+            rend.enabled = false;
+            Destroy(gameObject, audio.clip.length);
         }
     }
 
