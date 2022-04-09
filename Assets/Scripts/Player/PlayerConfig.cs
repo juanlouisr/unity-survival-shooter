@@ -18,21 +18,21 @@ public class PlayerConfig : MonoBehaviour
 
     public int MaxAttackPower => maxAttackPower;
     public int MaxSpeed => maxSpeed;
-    
+
     public Text powerDisplay;
     public Text speedDisplay;
 
-    void Awake ()
+    void Awake()
     {
-                powerDisplay.text = attackPower.ToString();
-                speedDisplay.text = moveSpeed.ToString();
+        powerDisplay.text = attackPower.ToString();
+        speedDisplay.text = moveSpeed.ToString();
     }
-    
+
     public void updatePowerDisplay()
     {
         powerDisplay.text = attackPower.ToString();
     }
-    
+
     public void updateSpeedDisplay()
     {
         speedDisplay.text = moveSpeed.ToString();

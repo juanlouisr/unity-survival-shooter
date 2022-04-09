@@ -62,7 +62,7 @@ public class SkeletonAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyHealth.currentHealth > 0)
+        if (enemyHealth && enemyHealth.currentHealth > 0)
         {
             UpdateSkeletonRotation();
             Fire();
@@ -110,6 +110,7 @@ public class SkeletonAttack : MonoBehaviour
             GameObject projectile = Instantiate(projectilePrefab,
                         pos,
                         Quaternion.identity);
+            projectile.GetComponent<SkeletonProjectile>().damage = attackDamage;
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             rb.velocity = transform.forward * projectileSpeed;
 
