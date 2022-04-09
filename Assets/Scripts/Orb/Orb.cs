@@ -53,11 +53,13 @@ public class Orb : MonoBehaviour
                 case OrbType.Power:
                     playerData.attackPower += multiplier * playerData.MaxAttackPower;
                     playerData.attackPower = Mathf.Clamp(playerData.attackPower, 0, playerData.MaxAttackPower);
+                    playerData.updatePowerDisplay();
                     break;
 
                 case OrbType.Speed:
                     playerData.moveSpeed += multiplier * playerData.MaxSpeed;
                     playerData.moveSpeed = Mathf.Clamp(playerData.moveSpeed, 0, playerData.MaxSpeed);
+                    playerData.updateSpeedDisplay();
                     break;
 
 

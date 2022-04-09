@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerConfig : MonoBehaviour
 {
@@ -17,4 +19,22 @@ public class PlayerConfig : MonoBehaviour
     public int MaxAttackPower => maxAttackPower;
     public int MaxSpeed => maxSpeed;
     
+    public Text powerDisplay;
+    public Text speedDisplay;
+
+    void Awake ()
+    {
+                powerDisplay.text = attackPower.ToString();
+                speedDisplay.text = moveSpeed.ToString();
+    }
+    
+    public void updatePowerDisplay()
+    {
+        powerDisplay.text = attackPower.ToString();
+    }
+    
+    public void updateSpeedDisplay()
+    {
+        speedDisplay.text = moveSpeed.ToString();
+    }
 }
