@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100078, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Complete
       objectReference: {fileID: 0}
     - target: {fileID: 100078, guid: f1d84cc28597f5641a3d9cbc4df7e306, type: 3}
       propertyPath: m_TagString
@@ -337,7 +337,7 @@ MonoBehaviour:
   maxHealth: 100
   attackPower: 20
   moveSpeed: 6
-  raysCount: 1
+  raysCount: 9
   shootingRange: 10
   timeBetweenBullets: 0.073
 --- !u!1 &3161031868610114894 stripped
