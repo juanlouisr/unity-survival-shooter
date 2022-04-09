@@ -7,12 +7,12 @@ public class EnemyAttack : MonoBehaviour
     public int attackDamage = 10;
 
 
-    Animator anim;
-    GameObject player;
-    PlayerHealth playerHealth;
-    EnemyHealth enemyHealth;
-    bool playerInRange;
-    float timer;
+    protected Animator anim;
+    protected GameObject player;
+    protected PlayerHealth playerHealth;
+    protected EnemyHealth enemyHealth;
+    protected bool playerInRange;
+    protected float timer;
 
 
     void Awake ()

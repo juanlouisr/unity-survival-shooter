@@ -1,37 +1,12 @@
 fileFormatVersion: 2
-guid: 498faf86f6dba5447bc97a2e4e411df5
+guid: fd9e30461b90ee34784f1fda0e7210d9
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: eyes_eyes_lambert
-    second: {fileID: 2100000, guid: 85e69962570356f4495c4e7d14f8dab6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: phong1
-    second: {fileID: 2100000, guid: 26f7ae3a3ce8b4644824650f3d525e55, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: goblin_diffuse
-    second: {fileID: 2800000, guid: a012e69ebadb1ef408a2c6a87796a86c, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: goblin_normal
-    second: {fileID: 2800000, guid: 0997bd4beb34ee54c99a10c9498324aa, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: goblin_specular
-    second: {fileID: 2800000, guid: e88ee321c40d7814099be549caaffd38, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -103,11 +78,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 55690d2390381a843adc2ae4c08cb2bd
-  - 4430c01ad11dbbe4798061758ee2386a
-  - ca748d708e0364c4ca613f24f954c92f
-  - fd9e30461b90ee34784f1fda0e7210d9
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -881,11 +852,12 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 498faf86f6dba5447bc97a2e4e411df5,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
