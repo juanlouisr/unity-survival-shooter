@@ -83,6 +83,11 @@ public class PlayerHealth : MonoBehaviour
         playerShooting.enabled = false;
     }
 
+    public void RefreshHealthSlider()
+    {
+        healthSlider.value = currentHealth;
+    }
+
     public void RestartLevel()
     {
         //meload ulang scene dengan index 0 pada build setting

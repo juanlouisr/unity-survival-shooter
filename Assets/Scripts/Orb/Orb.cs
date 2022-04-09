@@ -47,6 +47,7 @@ public class Orb : MonoBehaviour
                     var playerHealth = other.GetComponent<PlayerHealth>();
                     playerHealth.currentHealth += multiplier * playerData.maxHealth;
                     playerHealth.currentHealth = Mathf.Clamp(playerHealth.currentHealth, 0, playerData.maxHealth);
+                    playerHealth.RefreshHealthSlider();
                     break;
 
                 case OrbType.Power:
