@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5294971962044909135}
   - component: {fileID: 5294971962044909134}
   - component: {fileID: 391897628158342382}
+  - component: {fileID: 7712073565139825695}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Orb
@@ -117,6 +118,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 97427a7d6024a0048ab35bbacf50d2ab, type: 2}
   orbType: 0
   multiplier: 0.2
+  orbUpTime: 10
 --- !u!82 &391897628158342382
 AudioSource:
   m_ObjectHideFlags: 0
@@ -213,3 +215,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &7712073565139825695
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5294971962044909129}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
