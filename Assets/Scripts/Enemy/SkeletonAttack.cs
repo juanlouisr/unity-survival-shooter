@@ -20,7 +20,7 @@ public class SkeletonAttack : MonoBehaviour
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileLifetime = 5f;
-    [SerializeField] float firingRate = 0.2f;
+    [SerializeField] float firingRate = 1f;
 
     [Header("AI")]
     [SerializeField] bool useAI;
@@ -74,7 +74,7 @@ public class SkeletonAttack : MonoBehaviour
 
         if (playerHealth.currentHealth <= 0)
         {
-            anim.Play("Idle");
+            anim.SetTrigger("Dead");
         }
     }
 
@@ -82,6 +82,7 @@ public class SkeletonAttack : MonoBehaviour
     {
         var distance = Vector3.Distance(transform.position, player.transform.position);
         isFiring = (attackRange >= distance);
+        anim.SetBool("attacking", isFiring);
         if (isFiring && firingCoroutine == null)
         {
             firingCoroutine = StartCoroutine(FireContinously());
@@ -105,6 +106,8 @@ public class SkeletonAttack : MonoBehaviour
 
         while (true)
         {
+            
+
             Vector3 pos = transform.position + new Vector3(0, 0.35f, 0);
 
             GameObject projectile = Instantiate(projectilePrefab,
