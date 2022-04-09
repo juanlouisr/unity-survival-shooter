@@ -8,10 +8,14 @@ public class GameOverManager : MonoBehaviour
 {
     public Text warningText;
     public PlayerHealth playerHealth;
-    public float restartDelay = 5f;
+    public GameOverScreen GameOverScreen;
+    // public ScoreManager ScoreManager;
+    // public float restartDelay = 5f;
+    
+
 
     Animator anim;
-    float restartTimer;
+    // float restartTimer;
 
     void Awake()
     {
@@ -23,14 +27,15 @@ public class GameOverManager : MonoBehaviour
     {
         if (playerHealth.currentHealth <= 0)
         {
-            anim.SetTrigger("GameOver");
+            // Debug.Log(score);
+            // anim.SetTrigger("GameOver");
+            GameOverScreen.Setup(ScoreManager.score);
+            // restartTimer += Time.deltaTime;
 
-            restartTimer += Time.deltaTime;
-
-            if (restartTimer >= restartDelay)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            // if (restartTimer >= restartDelay)
+            // {
+            //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // }
         }
     }
 
