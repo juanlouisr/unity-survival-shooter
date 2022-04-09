@@ -1341,7 +1341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenAttacks: 0.5
-  attackDamage: 100
+  attackDamage: 20
+  explosionPrefab: {fileID: 4461120298977974323, guid: ac7408771ea8cea41af49b60f00d8c67,
+    type: 3}
 --- !u!114 &3863257804082062995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,6 +1373,7 @@ MonoBehaviour:
   sinkSpeed: 0.35
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 906ed56dfffe8f54e9febad7f9215220, type: 3}
+  isSinking: 0
 --- !u!195 &3863257804082063002
 NavMeshAgent:
   m_ObjectHideFlags: 0

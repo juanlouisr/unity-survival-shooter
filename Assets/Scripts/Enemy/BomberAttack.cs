@@ -1,19 +1,21 @@
-﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class BomberAttack : MonoBehaviour
 {
     public float timeBetweenAttacks = 0.5f;
     public int attackDamage = 10;
 
+    [SerializeField] ParticleSystem explosionPrefab;
 
-    protected Animator anim;
-    protected GameObject player;
-    protected PlayerHealth playerHealth;
-    protected EnemyHealth enemyHealth;
-    protected AudioSource audioSource;
-    protected bool playerInRange;
-    protected float timer;
+    Animator anim;
+    GameObject player;
+    PlayerHealth playerHealth;
+    EnemyHealth enemyHealth;
+    AudioSource audioSource;
+    bool playerInRange;
+    float timer;
 
 
     void Awake ()
@@ -62,15 +64,46 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-
-    protected void Attack()
+    void Attack()
     {
-        timer = 0f;
+        timer = -5f;
+        audioSource.clip = enemyHealth.deathClip;
+        audioSource.Play();
+        enemyHealth.currentHealth = 0;
+        var renderers = GetComponentsInChildren<Renderer>();
+
+        foreach (var renderer in renderers)
+        {
+            renderer.enabled = false;
+        }
+
+        PlayHitEffect();
 
         // Taking damage
         if (playerHealth.currentHealth > 0)
         {
             playerHealth.TakeDamage(attackDamage);
         }
+        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+
+        // Set Rigidbody ke kinematic
+        GetComponent<Rigidbody>().isKinematic = true;
+        enemyHealth.isSinking = true;
+        Destroy(gameObject,audioSource.clip.length);
     }
+
+    void PlayHitEffect()
+    {
+        if (explosionPrefab != null)
+        {
+            ParticleSystem temp = Instantiate(explosionPrefab, 
+                                                transform.position, 
+                                                Quaternion.identity);
+            Destroy(temp.gameObject, 
+                    temp.main.duration + 
+                    temp.main.startLifetime.constantMax);
+            
+        }
+    }
+
 }

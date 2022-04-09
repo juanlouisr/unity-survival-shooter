@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
     ParticleSystem hitParticles;
     CapsuleCollider capsuleCollider;
     bool isDead;
-    bool isSinking;
+    public bool isSinking;
 
 
     void Awake()
