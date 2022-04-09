@@ -461,6 +461,20 @@ CapsuleCollider:
   m_Height: 2.0760791
   m_Direction: 1
   m_Center: {x: 0.09262526, y: 0.98366344, z: 0}
+--- !u!136 &553507902
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883034849166722222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &2537085346697335194
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -588,6 +602,7 @@ MonoBehaviour:
   sinkSpeed: 0.31
   scoreValue: 50
   deathClip: {fileID: 8300000, guid: 62366b8d2c37a49dca550841c741317f, type: 3}
+  isSinking: 0
 --- !u!195 &11964485
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -598,7 +613,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -633,20 +648,6 @@ MonoBehaviour:
   firingRateVariance: 0.2
   firingRateMin: 0.2
   isFiring: 0
---- !u!136 &553507902
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883034849166722222}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1648471283872556477
 PrefabInstance:
   m_ObjectHideFlags: 0

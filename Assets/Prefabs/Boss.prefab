@@ -1191,8 +1191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15099f5ee559584089d5851df572def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenAttacks: 0.5
-  attackDamage: 10
+  timeBetweenAttacks: 1
+  attackDamage: 50
 --- !u!114 &1378575113124354893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,11 +1217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b9d14572410594cb85d40eedfb150c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 500
+  startingHealth: 1000
   currentHealth: 0
   sinkSpeed: 0.3
-  scoreValue: 10
-  deathClip: {fileID: 0}
+  scoreValue: 150
+  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
+  isSinking: 0
 --- !u!195 &1378575113124354897
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1232,7 +1233,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
