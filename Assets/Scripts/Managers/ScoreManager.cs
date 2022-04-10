@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -33,10 +33,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (useTime) 
         {
+            actualScore = timer.score;
             text.text = "Time: " + timer.score;
         }
         else
         {
+            actualScore = score;
             text.text = "Score: " + score;
         }
     }

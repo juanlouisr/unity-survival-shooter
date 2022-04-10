@@ -7,11 +7,20 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
     public Text pointText;
+        [SerializeField] bool useTime;
+
 
     public void Setup(int score){
         Time.timeScale = 0;
         gameObject.SetActive(true);
-        pointText.text = score.ToString() + " POINTS";
+        if (useTime) 
+        {
+            pointText.text = score.ToString() + " s";
+        }
+        else
+        {
+            pointText.text = score.ToString() + " POINTS";
+        }
     }
 
     public void RestartButton()

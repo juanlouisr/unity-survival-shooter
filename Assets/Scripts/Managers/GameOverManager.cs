@@ -29,7 +29,11 @@ public class GameOverManager : MonoBehaviour
         {
             // Debug.Log(score);
             // anim.SetTrigger("GameOver");
+            // var score = ScoreManager.score;
             GameOverScreen.Setup(ScoreManager.actualScore);
+            // SaveScore(score);
+            // var a = PlayerPrefs.GetInt("score");
+            // Debug.Log(a);
             // restartTimer += Time.deltaTime;
 
             // if (restartTimer >= restartDelay)
@@ -37,6 +41,11 @@ public class GameOverManager : MonoBehaviour
             //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             // }
         }
+    }
+
+    public void SaveScore(int score)
+    {
+        PlayerPrefs.SetInt("score", score);
     }
 
     public void ShowWarning(float enemyDistance)
