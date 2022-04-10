@@ -50,7 +50,16 @@ public class WaveController : MonoBehaviour
             }
         }
         currWaveIdx += 1;
-        weapUpgradeMenu.GetComponent<WeaponUpgradeMenu>().Setup();
+        if (currWaveIdx >= waves.Length)
+        {
+            _isFinishedSpawning = true;
+            gameOverScreen.Setup(ScoreManager.actualScore);
+            return;
+        }
+        if (currWaveIdx+1 % 3 == 0)
+        {
+            weapUpgradeMenu.GetComponent<WeaponUpgradeMenu>().Setup();
+        }
         waveText.text = waves[currWaveIdx].name;
     }
 
