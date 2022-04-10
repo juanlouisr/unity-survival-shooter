@@ -17,7 +17,7 @@ public class EnemyManager : MonoBehaviour
 
     bool _isFinishedSpawning = false;
 
-    bool FinishiedSpawning {get => _isFinishedSpawning;}
+    public bool FinishiedSpawning {get => _isFinishedSpawning;}
 
     int spawnedEnemyCount = 0;
 
@@ -50,7 +50,5 @@ public class EnemyManager : MonoBehaviour
 
         // Menduplikasi enemy
         Instantiate(Factory.FactoryMethod((int)spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-        
-
     }
 }

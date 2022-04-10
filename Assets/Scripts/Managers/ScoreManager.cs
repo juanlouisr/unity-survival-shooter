@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static int killingScore;
+    public static int score;
     public static int actualScore;
     [SerializeField] bool useTime;
 
@@ -17,14 +17,14 @@ public class ScoreManager : MonoBehaviour
     {
         text = GetComponent<Text>();
         timer = GetComponent<Timer>();
-        killingScore = 0;
+        score = 0;
         if (useTime) 
         {
             actualScore = timer.score;
         }
         else
         {
-            actualScore = killingScore;
+            actualScore = score;
         }
     }
 
@@ -33,8 +33,11 @@ public class ScoreManager : MonoBehaviour
     {
         if (useTime) 
         {
-            actualScore = timer.score;
+            text.text = "Time: " + timer.score;
         }
-        text.text = "Score: " + actualScore;
+        else
+        {
+            text.text = "Score: " + score;
+        }
     }
 }
