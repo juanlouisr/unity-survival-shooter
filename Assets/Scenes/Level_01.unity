@@ -1024,6 +1024,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUDCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4309362265663071533, guid: 5a3ae1ba9951812489578bfc3252473d,
+        type: 3}
+      propertyPath: useTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4309362265663071537, guid: 5a3ae1ba9951812489578bfc3252473d,
         type: 3}
       propertyPath: m_IsActive
