@@ -11,7 +11,8 @@ public class WaveController : MonoBehaviour
 
     [SerializeField] Text waveText;
 
-    Animator anim;
+    [SerializeField] GameObject weapUpgradeMenu;
+
 
     public GameObject[] waves;
     bool _isFinishedSpawning = false;
@@ -19,10 +20,6 @@ public class WaveController : MonoBehaviour
 
     int currWaveIdx = 0;
 
-    void Awake()
-    {
-        anim = GetComponent<Animator>();
-    }
     void Start()
     {
         waveText.text = waves[currWaveIdx].name;
@@ -53,9 +50,8 @@ public class WaveController : MonoBehaviour
             }
         }
         currWaveIdx += 1;
+        weapUpgradeMenu.GetComponent<WeaponUpgradeMenu>().Setup();
         waveText.text = waves[currWaveIdx].name;
-        anim.SetTrigger("Warning");
-
     }
 
 
