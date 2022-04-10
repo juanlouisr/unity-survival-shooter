@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType {Zombunny, ZomBear, Hellephant, Skeleton, Bomber, Boss}
+
 public class EnemyManager : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
-    public GameObject enemy;
-    public int spawnEnemy;
-    public float spawnTime = 3f;
-    public Transform[] spawnPoints;
+    [SerializeField] EnemyType spawnEnemy;
+    [SerializeField] float spawnTime = 3f;
+    [SerializeField] int enemyCount = 1;
 
-    [SerializeField]
-    public MonoBehaviour factory;
+    [SerializeField] bool infiniteEnemies = true;
+    [SerializeField] Transform[] spawnPoints;
+    [SerializeField] public MonoBehaviour factory;
     IFactory Factory { get { return factory as IFactory; } }
+
+    bool _isFinishedSpawning = false;
+
+    bool FinishiedSpawning {get => _isFinishedSpawning;}
+
+    int spawnedEnemyCount = 0;
+
+    PlayerHealth playerHealth;
+
+    void Awake()
+    {
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+    }
+
 
     void Start ()
     {
@@ -23,15 +38,18 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn ()
     {
-        if (playerHealth.currentHealth <= 0f)
+        if (playerHealth.currentHealth <= 0f || (!infiniteEnemies && spawnedEnemyCount >= enemyCount))
         {
+            _isFinishedSpawning = true;
             return;
         }
+
+        spawnedEnemyCount += 1;
 
         int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
         // Menduplikasi enemy
-        Instantiate(Factory.FactoryMethod(spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        Instantiate(Factory.FactoryMethod((int)spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
         
 
     }

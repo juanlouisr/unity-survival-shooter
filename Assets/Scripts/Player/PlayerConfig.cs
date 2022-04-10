@@ -24,6 +24,7 @@ public class PlayerConfig : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1;
         powerDisplay.text = attackPower.ToString();
         speedDisplay.text = moveSpeed.ToString();
     }
@@ -37,4 +38,5 @@ public class PlayerConfig : MonoBehaviour
     {
         speedDisplay.text = moveSpeed.ToString();
     }
+
 }

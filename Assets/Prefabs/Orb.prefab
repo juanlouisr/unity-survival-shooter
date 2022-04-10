@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materials:
-  - {fileID: 2100000, guid: 1c42e3095a3adca4ea3c9528dcb7c462, type: 2}
   - {fileID: 2100000, guid: 210590c031116234c80bef16128aabd2, type: 2}
+  - {fileID: 2100000, guid: 1c42e3095a3adca4ea3c9528dcb7c462, type: 2}
   - {fileID: 2100000, guid: 97427a7d6024a0048ab35bbacf50d2ab, type: 2}
   orbType: 0
   multiplier: 0.2

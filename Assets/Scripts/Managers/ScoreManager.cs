@@ -4,21 +4,37 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static int score;
-
+    public static int killingScore;
+    public static int actualScore;
+    [SerializeField] bool useTime;
 
     Text text;
+
+    Timer timer;
 
 
     void Awake ()
     {
         text = GetComponent<Text>();
-        score = 0;
+        timer = GetComponent<Timer>();
+        killingScore = 0;
+        if (useTime) 
+        {
+            actualScore = timer.score;
+        }
+        else
+        {
+            actualScore = killingScore;
+        }
     }
 
 
     void Update ()
     {
-        text.text = "Score: " + score;
+        if (useTime) 
+        {
+            actualScore = timer.score;
+        }
+        text.text = "Score: " + actualScore;
     }
 }

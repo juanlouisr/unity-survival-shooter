@@ -29,7 +29,7 @@ public class GameOverManager : MonoBehaviour
         {
             // Debug.Log(score);
             // anim.SetTrigger("GameOver");
-            GameOverScreen.Setup(ScoreManager.score);
+            GameOverScreen.Setup(ScoreManager.actualScore);
             // restartTimer += Time.deltaTime;
 
             // if (restartTimer >= restartDelay)
