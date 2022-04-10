@@ -56,7 +56,7 @@ public class WaveController : MonoBehaviour
             gameOverScreen.Setup(ScoreManager.actualScore);
             return;
         }
-        if (currWaveIdx+1 % 3 == 0)
+        if (currWaveIdx % 3 == 0)   
         {
             weapUpgradeMenu.GetComponent<WeaponUpgradeMenu>().Setup();
         }
